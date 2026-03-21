@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CHIMERA — Genomic Interface v1.5</title>
+<title>CHIMERA — Genomic Interface v1.6</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#08080a;--surface:#0e0e11;--surface-2:#141418;--border:rgba(255,255,255,0.06);--accent:#7c6af7;--accent-dim:rgba(124,106,247,0.15);--green:#4ade80;--amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;--cyan:#22d3ee;--text:#e8e6e1;--text-muted:rgba(232,230,225,0.55);--dim:rgba(232,230,225,0.30);--mono:'JetBrains Mono',monospace;--sans:'DM Sans',sans-serif}
@@ -52,7 +52,7 @@ canvas{display:block}
 .sync-seg{flex:1;height:5px}
 </style>
 <div class="top-bar">
-<div style="display:flex;align-items:center;gap:20px"><div class="logo">CHIMERA<span class="ver">GENOMIC INTERFACE v1.5</span></div><div class="jp">ゲノミック</div></div>
+<div style="display:flex;align-items:center;gap:20px"><div class="logo">CHIMERA<span class="ver">GENOMIC INTERFACE v1.6</span></div><div class="jp">ゲノミック</div></div>
 <div class="status"><div class="dot"></div><span style="color:var(--green)">NOMINAL</span><span style="color:var(--border)">|</span><span><span style="color:var(--cyan)">4</span> NODES</span><span style="color:var(--border)">|</span><span id="topClock" style="color:var(--amber)">--:--</span></div>
 </div>
 <div class="grid">
@@ -176,7 +176,7 @@ canvas{display:block}
 <!-- FOOTER -->
 <div class="foot">
 <div class="warn-stripe"><span style="background:var(--amber);color:#000;font-size:8px;font-weight:700;padding:1px 4px;letter-spacing:2px">RESTRICTED</span></div>
-<div class="foot-center"><span style="color:var(--amber)">WARNING:</span> FLUX TOLERANCE AT 84%<span style="color:var(--dim)">||</span>SECRET MENU LLC · INFERIS MESH v1.5<span style="color:var(--dim)">||</span><span style="color:var(--green)">57 GENES</span> ACTIVE<span style="color:var(--dim)">||</span><span style="color:var(--cyan)">3 STRANDS</span> EXPRESSING<span style="color:var(--dim)">||</span>SYS_TIME: <span id="clock" style="color:white">--:--:--</span></div>
+<div class="foot-center"><span style="color:var(--amber)">WARNING:</span> FLUX TOLERANCE AT 84%<span style="color:var(--dim)">||</span>SECRET MENU LLC · INFERIS MESH v1.6<span style="color:var(--dim)">||</span><span style="color:var(--green)">57 GENES</span> ACTIVE<span style="color:var(--dim)">||</span><span style="color:var(--cyan)">3 STRANDS</span> EXPRESSING<span style="color:var(--dim)">||</span>SYS_TIME: <span id="clock" style="color:white">--:--:--</span></div>
 <div class="sync-bar"><span style="color:var(--cyan);font-size:7px;letter-spacing:1px">GLOBAL SYNC</span><div style="flex:1;height:5px;display:flex;gap:1px"><div class="sync-seg" style="background:var(--cyan)"></div><div class="sync-seg" style="background:var(--cyan)"></div><div class="sync-seg" style="background:var(--cyan)"></div><div class="sync-seg" style="background:var(--cyan)"></div><div class="sync-seg" style="background:var(--cyan)"></div><div class="sync-seg" style="background:var(--accent)"></div><div class="sync-seg" style="background:var(--accent)"></div><div class="sync-seg" style="background:var(--surface-2)"></div><div class="sync-seg" style="background:var(--surface-2)"></div><div class="sync-seg" style="background:var(--surface-2)"></div></div></div>
 </div>
 <script>
@@ -416,11 +416,11 @@ function initTerrain(){
   
   // 5 major rings at different tilts — each carries 2 atom cores
   var ringDefs=[
-    {r:2.2,tiltX:0.0,tiltZ:0.0,speed:0.4,color:0x00f0ff},
-    {r:2.0,tiltX:1.2,tiltZ:0.3,speed:-0.55,color:0x00ff66},
-    {r:2.4,tiltX:0.5,tiltZ:1.1,speed:0.35,color:0xb026ff},
-    {r:1.8,tiltX:-0.8,tiltZ:0.6,speed:-0.65,color:0xffcf00},
-    {r:2.1,tiltX:0.3,tiltZ:-0.9,speed:0.5,color:0xff5050}
+    {r:1.4,tiltX:0.0,tiltZ:0.0,speed:0.6,color:0x00f0ff},
+    {r:1.3,tiltX:1.3,tiltZ:0.2,speed:-0.75,color:0x00ff66},
+    {r:1.5,tiltX:0.4,tiltZ:1.2,speed:0.5,color:0xb026ff},
+    {r:1.2,tiltX:-0.9,tiltZ:0.5,speed:-0.85,color:0xffcf00},
+    {r:1.6,tiltX:0.3,tiltZ:-1.0,speed:0.65,color:0xff5050}
   ];
   
   for(var ri=0;ri<ringDefs.length;ri++){
@@ -431,14 +431,14 @@ function initTerrain(){
     ringGroup.userData.spinSpeed=rd.speed;
     
     // Visible ring torus
-    var torusGeo=new THREE.TorusGeometry(rd.r,0.03,8,80);
-    var torusMat=new THREE.MeshBasicMaterial({color:rd.color,transparent:true,opacity:0.6});
+    var torusGeo=new THREE.TorusGeometry(rd.r,0.06,12,100);
+    var torusMat=new THREE.MeshBasicMaterial({color:rd.color,transparent:true,opacity:0.85});
     var torus=new THREE.Mesh(torusGeo,torusMat);
     ringGroup.add(torus);
     
     // Second thinner outer ring for depth
-    var torus2Geo=new THREE.TorusGeometry(rd.r+0.15,0.01,6,80);
-    var torus2Mat=new THREE.MeshBasicMaterial({color:rd.color,transparent:true,opacity:0.15});
+    var torus2Geo=new THREE.TorusGeometry(rd.r+0.12,0.04,8,100);
+    var torus2Mat=new THREE.MeshBasicMaterial({color:rd.color,transparent:true,opacity:0.35});
     var torus2=new THREE.Mesh(torus2Geo,torus2Mat);
     ringGroup.add(torus2);
     
@@ -463,8 +463,8 @@ function initTerrain(){
   }
   
   // Central nucleus — big glowing core
-  var nucleusGeo=new THREE.SphereGeometry(0.4,16,16);
-  var nucleusMat=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0.9});
+  var nucleusGeo=new THREE.SphereGeometry(0.5,16,16);
+  var nucleusMat=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:1.0});
   var nucleus=new THREE.Mesh(nucleusGeo,nucleusMat);
   orbitGroup.add(nucleus);
   var nucleusGlow=new THREE.SphereGeometry(0.8,12,12);
@@ -526,7 +526,7 @@ function animateTerrain(){
     orbitGroup.children.forEach(function(ringGroup){
       if(ringGroup.userData&&ringGroup.userData.spinSpeed){
         // The ring ROTATES — this is what makes it perpetual motion
-        ringGroup.rotation.y+=ringGroup.userData.spinSpeed*0.016;
+        ringGroup.rotation.y+=ringGroup.userData.spinSpeed*0.022;
         
         // Position atoms on the ring circumference
         ringGroup.children.forEach(function(child){
