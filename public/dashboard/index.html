@@ -21,7 +21,7 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;pointer-even
 </head>
 <body>
 <style>
-.bento{display:grid;padding:8px;grid-template-columns:1.2fr 1fr 1fr;grid-template-rows:0.7fr 1fr 0.8fr 0.8fr;gap:8px;flex:1;overflow:hidden}
+.bento{display:grid;padding:8px;grid-template-columns:1.2fr 1fr 1fr;grid-template-rows:0.5fr auto 0.85fr 0.85fr;gap:8px;flex:1;overflow:hidden}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;position:relative;overflow:hidden}
 .card-label{font-size:12px;font-weight:700;letter-spacing:2.5px;margin-bottom:2px}
 .card-jp{font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:10px}
@@ -50,7 +50,7 @@ canvas{display:block}
 .chat-input{display:flex;gap:6px;margin-top:6px}
 .chat-input input{flex:1;background:var(--surface-2);border:1px solid var(--border);border-radius:4px;padding:4px 8px;color:var(--text);font-family:var(--mono);font-size:9px;outline:none}
 .chat-input button{background:var(--accent-dim);border:1px solid rgba(124,106,247,0.3);border-radius:4px;color:var(--accent);padding:4px 10px;font-family:var(--mono);font-size:8px;cursor:pointer;letter-spacing:1px}
-.bottom-bar{display:flex;align-items:center;justify-content:space-between;padding:6px 20px;border-top:1px solid var(--border);background:rgba(8,8,10,0.95);font-size:9px;color:var(--dim);letter-spacing:1px;flex-shrink:0}
+.bottom-bar{display:flex;align-items:center;justify-content:space-between;padding:0;height:28px;border-top:1px solid var(--border);background:rgba(8,8,10,0.95);font-size:9px;color:var(--dim);letter-spacing:1px;flex-shrink:0}
 .bottom-bar .stats{display:flex;gap:12px;align-items:center}
 .bottom-bar .stats span{color:var(--green);font-weight:700}
 .escalation{display:flex;gap:2px}.escalation .bl{width:12px;height:5px;border-radius:1px}
@@ -63,7 +63,7 @@ canvas{display:block}
 <div class="bento">
 
 <!-- ROW 1: V2 layout — generous -->
-<div class="card" style="display:flex;flex-direction:column">
+<div class="card">
 <div class="card-label" style="color:var(--green)">GENOME BUILDER</div>
 <div class="card-jp">ゲノム構築 · 7-LAYER STRAND WEAVE</div>
 <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:3px;padding:8px 0;cursor:crosshair">
@@ -106,9 +106,9 @@ canvas{display:block}
 </div>
 <div class="card">
 <div style="display:flex;justify-content:space-between;align-items:start"><div><div class="card-label" style="color:var(--accent)">COALESCENCE</div><div class="card-jp">合体 · AT FIELD CONTAINMENT</div></div><div style="font-size:8px;color:var(--dim);border:1px solid rgba(124,106,247,0.3);padding:1px 6px;background:rgba(124,106,247,0.05)">TARGET: AT_FIELD</div></div>
-<div style="flex:1;display:flex;align-items:center;justify-content:center;position:relative;max-height:280px">
+<div style="flex:1;display:flex;align-items:center;justify-content:center;position:relative">
 <div style="position:absolute;width:160px;height:160px;background:var(--accent);border-radius:50%;filter:blur(60px);opacity:0.12;animation:breathe 3s ease infinite"></div>
-<svg viewBox="0 0 200 200" style="width:85%;height:85%;position:relative;z-index:2;filter:drop-shadow(0 0 4px rgba(124,106,247,0.5));animation:spin-slow 30s linear infinite">
+<svg viewBox="0 0 200 200" style="width:70%;height:70%;position:relative;z-index:2;filter:drop-shadow(0 0 4px rgba(124,106,247,0.5));animation:spin-slow 30s linear infinite">
 <circle cx="100" cy="100" r="90" stroke="var(--accent)" stroke-width="0.5" fill="none" stroke-dasharray="2 4"/>
 <circle cx="100" cy="100" r="95" stroke="var(--accent)" stroke-width="0.2" fill="none" opacity="0.4"/>
 <ellipse cx="100" cy="100" rx="90" ry="25" stroke="var(--accent)" stroke-width="0.5" fill="none"/>
@@ -166,22 +166,6 @@ canvas{display:block}
 </div>
 </div>
 <!-- ROW 4: NEW — Deploy + Dispatch + ForgeChief -->
-<div class="card">
-<div class="card-label" style="color:var(--green)">GENOME DEPLOY</div>
-<div class="card-jp">最終配備 · OPTIMIZED WORKFLOW OUTPUT</div>
-<canvas id="deployCanvas" style="width:100%;height:calc(100% - 55px);margin:2px 0"></canvas>
-<div style="display:flex;justify-content:space-between;align-items:center"><span class="badge bg-grn">DEPLOYING</span><span style="font-size:8px;color:var(--dim);letter-spacing:1px">STRAND-P1 → PRODUCTION</span></div>
-</div>
-<div class="card">
-<div class="card-label" style="color:var(--amber)">BRIEF → DISPATCH</div>
-<div class="card-jp">信号抽出 · SIGNAL EXTRACTION</div>
-<canvas id="signalCanvas" style="width:100%;height:calc(100% - 60px);margin:2px 0"></canvas>
-<div style="display:flex;justify-content:space-between;align-items:center;font-size:8px">
-<div><span style="color:var(--dim)">NOISE_DENSITY</span> <span style="color:var(--green);font-weight:700">0.01</span></div>
-<div><span style="color:var(--dim)">SIGNAL_CLARITY</span> <span style="color:var(--green);font-weight:700">90.5%</span></div>
-<div><span style="color:var(--dim)">INSIGHTS</span> <span style="color:var(--green);font-weight:700">0005</span></div>
-</div>
-</div>
 <div class="card" style="display:flex;flex-direction:column">
 <div class="card-label" style="color:var(--cyan)">FORGECHIEF</div>
 <div class="card-jp">指揮官 · DISPATCH INTERFACE</div>
@@ -195,12 +179,29 @@ canvas{display:block}
 <div class="chat-line"><span class="role chief">CHIEF</span>Splicing ElevenLabs → RESONANCE. TIMBRE active.</div>
 </div>
 <div class="chat-input"><input type="text" placeholder="Brief ForgeChief..."><button>DISPATCH</button></div>
+</div></div>
+<div class="card">
+<div class="card-label" style="color:var(--amber)">BRIEF → DISPATCH</div>
+<div class="card-jp">信号抽出 · SIGNAL EXTRACTION</div>
+<canvas id="signalCanvas" style="width:100%;height:calc(100% - 60px);margin:2px 0"></canvas>
+<div style="display:flex;justify-content:space-between;align-items:center;font-size:8px">
+<div><span style="color:var(--dim)">NOISE_DENSITY</span> <span style="color:var(--green);font-weight:700">0.01</span></div>
+<div><span style="color:var(--dim)">SIGNAL_CLARITY</span> <span style="color:var(--green);font-weight:700">90.5%</span></div>
+<div><span style="color:var(--dim)">INSIGHTS</span> <span style="color:var(--green);font-weight:700">0005</span></div>
 </div>
+</div>
+<div class="card">
+<div class="card-label" style="color:var(--green)">GENOME DEPLOY</div>
+<div class="card-jp">最終配備 · OPTIMIZED WORKFLOW OUTPUT</div>
+<canvas id="deployCanvas" style="width:100%;height:calc(100% - 55px);margin:2px 0"></canvas>
+<div style="display:flex;justify-content:space-between;align-items:center"><span class="badge bg-grn">DEPLOYING</span><span style="font-size:8px;color:var(--dim);letter-spacing:1px">STRAND-P1 → PRODUCTION</span></div>
+
 
 </div>
 <div class="bottom-bar">
-<div style="letter-spacing:2px">SECRET MENU LLC · UNISEC · INFERIS MESH v1.0</div>
-<div class="stats"><span>57</span> GENES<span style="color:var(--dim)">·</span><span>3</span> STRANDS<span style="color:var(--dim)">·</span><span style="color:var(--cyan)">2</span> NODES<div class="escalation"><div class="bl b1"></div><div class="bl b2"></div><div class="bl b3"></div><div class="bl b4"></div><div class="bl b5"></div></div><span style="color:var(--dim)">ACIDBURN :3142</span></div>
+<div style="width:100px;height:100%;background:repeating-linear-gradient(-45deg,#111,#111 8px,var(--amber) 8px,var(--amber) 16px);opacity:0.7;border-right:1px solid rgba(245,158,11,0.3);display:flex;align-items:center;justify-content:center"><span style="background:var(--amber);color:#000;font-size:8px;font-weight:700;padding:1px 4px;letter-spacing:2px">RESTRICTED</span></div>
+<div style="flex:1;display:flex;align-items:center;padding:0 16px;gap:16px;overflow:hidden;white-space:nowrap"><span style="color:var(--amber)">WARNING:</span> FLUX TOLERANCE AT 84%<span style="color:var(--dim)">||</span>SECRET MENU LLC · INFERIS MESH v1.0<span style="color:var(--dim)">||</span><span style="color:var(--green)">57 GENES</span> ACTIVE<span style="color:var(--dim)">||</span><span style="color:var(--cyan)">3 STRANDS</span> EXPRESSING<span style="color:var(--dim)">||</span>SYS_TIME: <span id="clock" style="color:white">--:--:--</span></div>
+<div style="width:160px;height:100%;border-left:1px solid var(--border);display:flex;align-items:center;padding:0 8px;gap:4px;background:rgba(10,10,10,0.8)"><span style="color:var(--cyan);font-size:7px;letter-spacing:1px">GLOBAL SYNC</span><div style="flex:1;height:5px;display:flex;gap:1px"><div style="flex:1;height:100%;background:var(--cyan)"></div><div style="flex:1;height:100%;background:var(--cyan)"></div><div style="flex:1;height:100%;background:var(--cyan)"></div><div style="flex:1;height:100%;background:var(--cyan)"></div><div style="flex:1;height:100%;background:var(--cyan)"></div><div style="flex:1;height:100%;background:var(--accent)"></div><div style="flex:1;height:100%;background:var(--accent)"></div><div style="flex:1;height:100%;background:var(--surface-2)"></div><div style="flex:1;height:100%;background:var(--surface-2)"></div><div style="flex:1;height:100%;background:var(--surface-2)"></div></div></div>
 </div>
 <script>
 function rc(c){c.width=c.parentElement.clientWidth;c.height=c.parentElement.clientHeight||parseInt(c.style.height)||120}
@@ -229,7 +230,7 @@ drawDeploy();
 var st=0,sigData=[];for(var i=0;i<200;i++)sigData.push({v:Math.random()*2-1,target:0});
 function drawSignal(){var c=document.getElementById('signalCanvas');if(!c||!c.width)return requestAnimationFrame(drawSignal);var ctx=c.getContext('2d'),w=c.width,h=c.height,mid=h/2;ctx.clearRect(0,0,w,h);ctx.strokeStyle='rgba(255,255,255,0.03)';ctx.lineWidth=0.5;for(var y=0;y<h;y+=16){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}ctx.beginPath();ctx.moveTo(w/2,0);ctx.lineTo(w/2,h);ctx.stroke();for(var i=0;i<sigData.length;i++){sigData[i].target=Math.sin(i*0.08+st)*0.3;sigData[i].v+=(sigData[i].target-sigData[i].v)*0.02+(Math.random()-0.5)*0.05}for(var layer=0;layer<3;layer++){ctx.beginPath();ctx.strokeStyle='rgba(232,230,225,'+[0.12,0.2,0.45][layer]+')';ctx.lineWidth=[0.5,0.8,1.2][layer];for(var i=0;i<sigData.length;i++){var x=i*(w/sigData.length),amp=[35,22,12][layer],y=mid+sigData[i].v*amp+(layer-1)*3+Math.sin(i*0.15+st*(layer+1)*0.5)*amp*0.3;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}ctx.stroke()}ctx.fillStyle='rgba(74,222,128,0.4)';ctx.font='8px JetBrains Mono';ctx.fillText('INSIGHTS_EXTRACTED',w/2-50,h-12);ctx.font='16px JetBrains Mono';ctx.fillStyle='rgba(74,222,128,0.7)';ctx.fillText('0005',w/2-12,h-0);st+=0.015;requestAnimationFrame(drawSignal)}
 drawSignal();
-setInterval(function(){var n=new Date();document.getElementById('clock').textContent=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')},1000);
+setInterval(function(){var n=new Date();var ms=String(Math.floor(n.getMilliseconds()/10)).padStart(2,'0');document.getElementById('clock').textContent=n.toTimeString().split(' ')[0]+':'+ms},1000);
 </script>
 </body>
 </html>
