@@ -321,8 +321,8 @@ function fetchMesh() {
       var dot = n.online ? 'on' : (n.hostname === 'archlinux' ? 'off' : 'idl');
       var name = n.hostname.toUpperCase();
       if (name === 'ARCHLINUX') name = 'IRONHIDE';
-      if (name === HERBIES MAC MINI") name = HERBIE;
-      if (name === "MICHELLES IMAC) name = 'MICHELLE';
+      if (name.indexOf("HERBIE")>=0) name="HERBIE";
+      if (name.indexOf("MICHELLE")>=0) name="MICHELLE";
       var ip = n.ip || '';
       container.innerHTML += '<div class="nr"><div class="nd ' + dot + '"></div><div class="nn">' + name + '</div><div class="ni">' + ip + '</div></div>';
     });
