@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CHIMERA — Genomic Interface v0.6</title>
+<title>CHIMERA — Genomic Interface v0.7</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#08080a;--surface:#0e0e11;--surface-2:#141418;--border:rgba(255,255,255,0.06);--accent:#7c6af7;--accent-dim:rgba(124,106,247,0.15);--green:#4ade80;--amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;--cyan:#22d3ee;--text:#e8e6e1;--text-muted:rgba(232,230,225,0.55);--dim:rgba(232,230,225,0.30);--mono:'JetBrains Mono',monospace;--sans:'DM Sans',sans-serif}
@@ -21,7 +21,7 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;pointer-even
 </head>
 <body>
 <style>
-.bento{display:grid;padding:8px;grid-template-columns:1.2fr 1fr 1fr;grid-template-rows:0.6fr auto 0.7fr 0.7fr;gap:8px;flex:1;overflow:hidden}
+.bento{display:grid;padding:8px;grid-template-columns:1.2fr 1fr 1fr;grid-template-rows:0.7fr 1fr 0.8fr 0.8fr;gap:8px;flex:1;overflow:hidden}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;position:relative;overflow:hidden}
 .card-label{font-size:12px;font-weight:700;letter-spacing:2.5px;margin-bottom:2px}
 .card-jp{font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:10px}
@@ -57,13 +57,13 @@ canvas{display:block}
 .b1{background:var(--green)}.b2{background:var(--green);opacity:0.6}.b3{background:var(--amber)}.b4{background:var(--red);opacity:0.4}.b5{background:var(--red);opacity:0.2}
 </style>
 <div class="top-bar">
-<div style="display:flex;align-items:center;gap:20px"><div class="logo">CHIMERA<span class="ver">GENOMIC INTERFACE v0.6</span></div><div class="jp">ゲノミック</div></div>
+<div style="display:flex;align-items:center;gap:20px"><div class="logo">CHIMERA<span class="ver">GENOMIC INTERFACE v0.7</span></div><div class="jp">ゲノミック</div></div>
 <div class="status"><div class="dot"></div><span style="color:var(--green)">NOMINAL</span><span style="color:var(--border)">|</span><span><span style="color:var(--cyan)">4</span> NODES</span><span style="color:var(--border)">|</span><span id="clock" style="color:var(--amber)">--:--</span></div>
 </div>
 <div class="bento">
 
 <!-- ROW 1: V2 layout — generous -->
-<div class="card">
+<div class="card" style="display:flex;flex-direction:column">
 <div class="card-label" style="color:var(--green)">GENOME BUILDER</div>
 <div class="card-jp">ゲノム構築 · 7-LAYER STRAND WEAVE</div>
 <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:3px;padding:8px 0;cursor:crosshair">
@@ -106,7 +106,7 @@ canvas{display:block}
 </div>
 <div class="card">
 <div style="display:flex;justify-content:space-between;align-items:start"><div><div class="card-label" style="color:var(--accent)">COALESCENCE</div><div class="card-jp">合体 · AT FIELD CONTAINMENT</div></div><div style="font-size:8px;color:var(--dim);border:1px solid rgba(124,106,247,0.3);padding:1px 6px;background:rgba(124,106,247,0.05)">TARGET: AT_FIELD</div></div>
-<div style="flex:1;display:flex;align-items:center;justify-content:center;position:relative">
+<div style="flex:1;display:flex;align-items:center;justify-content:center;position:relative;max-height:280px">
 <div style="position:absolute;width:160px;height:160px;background:var(--accent);border-radius:50%;filter:blur(60px);opacity:0.12;animation:breathe 3s ease infinite"></div>
 <svg viewBox="0 0 200 200" style="width:85%;height:85%;position:relative;z-index:2;filter:drop-shadow(0 0 4px rgba(124,106,247,0.5));animation:spin-slow 30s linear infinite">
 <circle cx="100" cy="100" r="90" stroke="var(--accent)" stroke-width="0.5" fill="none" stroke-dasharray="2 4"/>
