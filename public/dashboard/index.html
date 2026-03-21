@@ -268,12 +268,9 @@ var el2=document.getElementById('topClock');if(el2)el2.textContent=n.toTimeStrin
 <script>
 // === LIVE DATA WIRING ===
 // Paperclip SSE → Gene Status bars + Coalescence speed
-var pSource = new EventSource('http://localhost:3144/');
 var lastCpu=0, lastMem=0, lastDisk=0, lastGpu=0, lastTemp=0;
-
-pSource.onmessage = function(e) {
-  try {
-    var d = JSON.parse(e.data);
+function pollTelemetry(){
+  fetch('/telemetry.json?t='+Date.now()).then(function(r){return r.json()}).then(function(d){
     lastCpu = Math.round(d.cpu || 0);
     lastMem = Math.round(d.memory ? d.memory.percent : 0);
     lastDisk = Math.round(d.disk ? d.disk.percent : 0);
@@ -303,12 +300,13 @@ pSource.onmessage = function(e) {
       sphere.style.animationDuration = speed + 's';
     }
 
-    // Update uptime in footer if available
+    // Update uptime
     var uptimeEl = document.getElementById('uptime');
     if (uptimeEl && d.uptime) uptimeEl.textContent = d.uptime;
-  } catch(err) {}
-};
-pSource.onerror = function() { console.log('Paperclip SSE reconnecting...'); };
+  }).catch(function(){});
+}
+setInterval(pollTelemetry, 2000);
+setTimeout(pollTelemetry, 500);
 
 // Tailscale → Mesh panel (poll every 30s via a tiny PHP-less approach: read from a file updated by cron)
 function fetchMesh() {
