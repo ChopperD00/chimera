@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CHIMERA — Genomic Interface v0.9</title>
+<title>CHIMERA — Genomic Interface v1.0</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#08080a;--surface:#0e0e11;--surface-2:#141418;--border:rgba(255,255,255,0.06);--accent:#7c6af7;--accent-dim:rgba(124,106,247,0.15);--green:#4ade80;--amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;--cyan:#22d3ee;--text:#e8e6e1;--text-muted:rgba(232,230,225,0.55);--dim:rgba(232,230,225,0.30);--mono:'JetBrains Mono',monospace;--sans:'DM Sans',sans-serif}
@@ -51,7 +51,7 @@ canvas{display:block}
 .sync-seg{flex:1;height:5px}
 </style>
 <div class="top-bar">
-<div style="display:flex;align-items:center;gap:20px"><div class="logo">CHIMERA<span class="ver">GENOMIC INTERFACE v0.9</span></div><div class="jp">ゲノミック</div></div>
+<div style="display:flex;align-items:center;gap:20px"><div class="logo">CHIMERA<span class="ver">GENOMIC INTERFACE v1.0</span></div><div class="jp">ゲノミック</div></div>
 <div class="status"><div class="dot"></div><span style="color:var(--green)">NOMINAL</span><span style="color:var(--border)">|</span><span><span style="color:var(--cyan)">4</span> NODES</span><span style="color:var(--border)">|</span><span id="topClock" style="color:var(--amber)">--:--</span></div>
 </div>
 <div class="grid">
@@ -270,7 +270,10 @@ var el2=document.getElementById('topClock');if(el2)el2.textContent=n.toTimeStrin
 // Paperclip SSE → Gene Status bars + Coalescence speed
 var lastCpu=0, lastMem=0, lastDisk=0, lastGpu=0, lastTemp=0;
 function pollTelemetry(){
-  fetch('/telemetry.json?t='+Date.now()).then(function(r){return r.json()}).then(function(d){
+  var dbg=document.getElementById('dbg');
+  if(dbg)dbg.textContent='FETCHING...';
+  fetch('/telemetry.json?t='+Date.now()).then(function(r){if(dbg)dbg.textContent='GOT RESPONSE '+r.status;return r.json()}).then(function(d){
+    if(dbg)dbg.textContent='CPU:'+d.cpu+'% GPU:'+d.gpu.gpu_percent+'% BARS:'+document.querySelectorAll('.gene-bar').length;
     lastCpu = Math.round(d.cpu || 0);
     lastMem = Math.round(d.memory ? d.memory.percent : 0);
     lastDisk = Math.round(d.disk ? d.disk.percent : 0);
@@ -303,14 +306,14 @@ function pollTelemetry(){
     // Update uptime
     var uptimeEl = document.getElementById('uptime');
     if (uptimeEl && d.uptime) uptimeEl.textContent = d.uptime;
-  }).catch(function(){});
+  }).catch(function(err){var dbg=document.getElementById('dbg');if(dbg)dbg.textContent='ERROR:'+err.message;});
 }
 setInterval(pollTelemetry, 2000);
 setTimeout(pollTelemetry, 500);
 
 // Tailscale → Mesh panel (poll every 30s via a tiny PHP-less approach: read from a file updated by cron)
 function fetchMesh() {
-  fetch('/mesh-status.json').then(function(r){return r.json()}).then(function(nodes){
+  fetch('/api/mesh').then(function(r){return r.json()}).then(function(nodes){
     var container = document.getElementById('meshNodes');
     if (!container || !nodes.length) return;
     container.innerHTML = '';
@@ -343,7 +346,7 @@ function sendToChief() {
   appendChat('ru', 'YOU', msg);
   appendChat('rc', 'CHIEF', 'Processing...');
 
-  fetch('http://localhost:11434/api/generate', {
+  fetch('/api/ollama/api/generate', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
@@ -371,5 +374,6 @@ function appendChat(roleClass, roleName, text) {
 }
 
 </script>
+<div id="dbg" style="position:fixed;bottom:32px;left:120px;background:rgba(0,0,0,0.9);color:#0f0;font-family:monospace;font-size:11px;padding:4px 8px;z-index:10000;border:1px solid #0f0">CONNECTING...</div>
 </body>
 </html>
