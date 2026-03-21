@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CHIMERA — Genomic Interface v0.5</title>
+<title>CHIMERA — Genomic Interface v0.6</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#08080a;--surface:#0e0e11;--surface-2:#141418;--border:rgba(255,255,255,0.06);--accent:#7c6af7;--accent-dim:rgba(124,106,247,0.15);--green:#4ade80;--amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;--cyan:#22d3ee;--text:#e8e6e1;--text-muted:rgba(232,230,225,0.55);--dim:rgba(232,230,225,0.30);--mono:'JetBrains Mono',monospace;--sans:'DM Sans',sans-serif}
@@ -21,14 +21,14 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;pointer-even
 </head>
 <body>
 <style>
-.bento{display:grid;padding:8px;grid-template-columns:1.2fr 1fr 1fr;grid-template-rows:1fr 1fr 1fr 1fr;gap:8px;flex:1;overflow:hidden}
+.bento{display:grid;padding:8px;grid-template-columns:1.2fr 1fr 1fr;grid-template-rows:0.6fr auto 0.7fr 0.7fr;gap:8px;flex:1;overflow:hidden}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;position:relative;overflow:hidden}
 .card-label{font-size:12px;font-weight:700;letter-spacing:2.5px;margin-bottom:2px}
 .card-jp{font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:10px}
 .badge{display:inline-block;padding:2px 7px;border-radius:3px;font-size:9px;font-weight:500;letter-spacing:0.5px;margin-right:3px;margin-bottom:3px}
 .bg-grn{background:rgba(74,222,128,0.08);color:var(--green)}.bg-cyn{background:rgba(34,211,238,0.06);color:var(--cyan)}.bg-amb{background:rgba(245,158,11,0.08);color:var(--amber)}.bg-acc{background:rgba(124,106,247,0.08);color:var(--accent)}.bg-red{background:rgba(239,68,68,0.08);color:var(--red)}.bg-dim{background:rgba(255,255,255,0.03);color:var(--dim)}
 canvas{display:block}
-@keyframes breathe{0%,100%{opacity:0.6}50%{opacity:1}}
+@keyframes spin-slow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}@keyframes spin-slow-reverse{from{transform:rotate(360deg)}to{transform:rotate(0deg)}}@keyframes dash{to{stroke-dashoffset:-100}}@keyframes dna-shift{0%{transform:translateX(-6px)}50%{transform:translateX(6px)}100%{transform:translateX(-6px)}}@keyframes breathe{0%,100%{opacity:0.6}50%{opacity:1}}
 @keyframes chevron-scroll{to{background-position:12px 0,18px 0}}
 .full-row{grid-column:1/-1;display:grid;grid-template-columns:1fr 1.2fr 0.8fr;gap:8px}
 .strand-row{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;background:var(--surface-2);border-radius:4px;margin-bottom:4px;border-left:2px solid var(--green);font-size:10px}
@@ -57,7 +57,7 @@ canvas{display:block}
 .b1{background:var(--green)}.b2{background:var(--green);opacity:0.6}.b3{background:var(--amber)}.b4{background:var(--red);opacity:0.4}.b5{background:var(--red);opacity:0.2}
 </style>
 <div class="top-bar">
-<div style="display:flex;align-items:center;gap:20px"><div class="logo">CHIMERA<span class="ver">GENOMIC INTERFACE v0.5</span></div><div class="jp">ゲノミック</div></div>
+<div style="display:flex;align-items:center;gap:20px"><div class="logo">CHIMERA<span class="ver">GENOMIC INTERFACE v0.6</span></div><div class="jp">ゲノミック</div></div>
 <div class="status"><div class="dot"></div><span style="color:var(--green)">NOMINAL</span><span style="color:var(--border)">|</span><span><span style="color:var(--cyan)">4</span> NODES</span><span style="color:var(--border)">|</span><span id="clock" style="color:var(--amber)">--:--</span></div>
 </div>
 <div class="bento">
@@ -66,9 +66,18 @@ canvas{display:block}
 <div class="card">
 <div class="card-label" style="color:var(--green)">GENOME BUILDER</div>
 <div class="card-jp">ゲノム構築 · 7-LAYER STRAND WEAVE</div>
-<canvas id="helixCanvas" style="width:100%;height:calc(100% - 60px)"></canvas>
-<div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px">
-<div style="font-size:10px;color:var(--text-muted)">7 strands syncing</div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:3px;padding:8px 0;cursor:crosshair">
+<div style="display:flex;gap:3px;justify-content:center;align-items:center;animation:dna-shift 4s ease-in-out infinite"><div style="height:2px;width:28px;background:var(--cyan);box-shadow:0 0 5px var(--cyan)"></div><div style="height:2px;width:8px;background:var(--accent)"></div><div style="height:2px;width:48px;background:rgba(124,106,247,0.3)"></div></div>
+<div style="display:flex;gap:3px;justify-content:center;align-items:center;animation:dna-shift 4s ease-in-out infinite 2s"><div style="height:2px;width:36px;background:var(--green)"></div><div style="height:2px;width:16px;background:var(--accent);box-shadow:0 0 5px var(--accent)"></div><div style="height:2px;width:40px;background:rgba(124,106,247,0.3)"></div></div>
+<div style="display:flex;gap:3px;justify-content:center;align-items:center;animation:dna-shift 4s ease-in-out infinite"><div style="height:2px;width:44px;background:rgba(34,211,238,0.5)"></div><div style="height:2px;width:24px;background:var(--amber)"></div><div style="height:2px;width:32px;background:rgba(124,106,247,0.3)"></div></div>
+<div style="display:flex;gap:3px;justify-content:center;align-items:center;animation:dna-shift 4s ease-in-out infinite 2s"><div style="height:2px;width:52px;background:rgba(74,222,128,0.3)"></div><div style="height:2px;width:32px;background:var(--accent);box-shadow:0 0 5px var(--accent)"></div><div style="height:2px;width:24px;background:rgba(239,68,68,0.3)"></div></div>
+<div style="display:flex;gap:2px;justify-content:center;align-items:center;margin:2px 0"><div style="height:3px;width:120px;background:linear-gradient(to right,var(--cyan),var(--accent));box-shadow:0 0 8px var(--accent)"></div><span style="font-size:7px;color:var(--dim);margin-left:4px">GEN-V4</span></div>
+<div style="display:flex;gap:3px;justify-content:center;align-items:center;animation:dna-shift 4s ease-in-out infinite"><div style="height:2px;width:24px;background:var(--cyan)"></div><div style="height:2px;width:56px;background:rgba(124,106,247,0.4)"></div><div style="height:2px;width:40px;background:var(--accent);box-shadow:0 0 5px var(--accent)"></div></div>
+<div style="display:flex;gap:3px;justify-content:center;align-items:center;animation:dna-shift 4s ease-in-out infinite 2s"><div style="height:2px;width:28px;background:var(--cyan);box-shadow:0 0 5px var(--cyan)"></div><div style="height:2px;width:48px;background:rgba(59,130,246,0.5)"></div><div style="height:2px;width:36px;background:rgba(236,72,153,0.3)"></div></div>
+<div style="display:flex;gap:3px;justify-content:center;align-items:center;animation:dna-shift 4s ease-in-out infinite"><div style="height:2px;width:40px;background:var(--green)"></div><div style="height:2px;width:8px;background:var(--accent);box-shadow:0 0 5px var(--accent)"></div><div style="height:2px;width:48px;background:rgba(124,106,247,0.3)"></div></div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center">
+<span style="font-size:9px;color:var(--text-muted)">7 STRANDS EXPRESSING</span>
 <div class="badge bg-cyn">SYNC 78%</div>
 </div>
 </div>
@@ -96,10 +105,29 @@ canvas{display:block}
 <div style="margin-top:6px;font-size:9px;color:var(--dim);letter-spacing:1px">3 STRANDS · 12 PHENOTYPES THIS WEEK</div>
 </div>
 <div class="card">
-<div class="card-label" style="color:var(--accent)">COALESCENCE</div>
-<div class="card-jp">合体 · NEURAL MESH ACTIVITY</div>
-<canvas id="neuralCanvas" style="width:100%;height:calc(100% - 50px)"></canvas>
-<div style="display:flex;justify-content:space-between;align-items:center;margin-top:2px"><span class="badge bg-grn">57 NODES ACTIVE</span><span class="badge bg-acc">RESOLVING 73%</span></div>
+<div style="display:flex;justify-content:space-between;align-items:start"><div><div class="card-label" style="color:var(--accent)">COALESCENCE</div><div class="card-jp">合体 · AT FIELD CONTAINMENT</div></div><div style="font-size:8px;color:var(--dim);border:1px solid rgba(124,106,247,0.3);padding:1px 6px;background:rgba(124,106,247,0.05)">TARGET: AT_FIELD</div></div>
+<div style="flex:1;display:flex;align-items:center;justify-content:center;position:relative">
+<div style="position:absolute;width:160px;height:160px;background:var(--accent);border-radius:50%;filter:blur(60px);opacity:0.12;animation:breathe 3s ease infinite"></div>
+<svg viewBox="0 0 200 200" style="width:85%;height:85%;position:relative;z-index:2;filter:drop-shadow(0 0 4px rgba(124,106,247,0.5));animation:spin-slow 30s linear infinite">
+<circle cx="100" cy="100" r="90" stroke="var(--accent)" stroke-width="0.5" fill="none" stroke-dasharray="2 4"/>
+<circle cx="100" cy="100" r="95" stroke="var(--accent)" stroke-width="0.2" fill="none" opacity="0.4"/>
+<ellipse cx="100" cy="100" rx="90" ry="25" stroke="var(--accent)" stroke-width="0.5" fill="none"/>
+<ellipse cx="100" cy="100" rx="90" ry="55" stroke="var(--accent)" stroke-width="0.5" fill="none"/>
+<ellipse cx="100" cy="100" rx="25" ry="90" stroke="var(--accent)" stroke-width="0.5" fill="none"/>
+<ellipse cx="100" cy="100" rx="55" ry="90" stroke="var(--accent)" stroke-width="0.5" fill="none"/>
+<path d="M100 100 Q 120 40 160 30" stroke="var(--cyan)" stroke-width="1" fill="none" stroke-dasharray="4 8" style="animation:dash 2s linear infinite"/>
+<path d="M100 100 Q 50 140 30 150" stroke="var(--cyan)" stroke-width="1" fill="none" stroke-dasharray="4 8" style="animation:dash 2s linear infinite"/>
+<path d="M100 100 Q 140 150 170 120" stroke="var(--amber)" stroke-width="1" fill="none" stroke-dasharray="4 8" style="animation:dash 2s linear infinite"/>
+<path d="M100 100 Q 60 40 20 60" stroke="var(--green)" stroke-width="1" fill="none" stroke-dasharray="4 8" style="animation:dash 2s linear infinite"/>
+</svg>
+<svg viewBox="0 0 100 100" style="width:60px;height:60px;position:absolute;z-index:3;animation:spin-slow-reverse 40s linear infinite">
+<polygon points="50,10 90,50 50,90 10,50" stroke="var(--cyan)" stroke-width="1" fill="rgba(34,211,238,0.05)"/>
+<polygon points="50,20 80,50 50,80 20,50" stroke="var(--accent)" stroke-width="1.5" fill="none"/>
+<circle cx="50" cy="50" r="12" fill="var(--amber)" opacity="0.7" style="animation:pulse 1.5s ease-in-out infinite"/>
+</svg>
+<div style="position:absolute;width:4px;height:4px;background:white;border-radius:50%;z-index:4;box-shadow:0 0 8px white"></div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center"><span class="badge bg-grn">57 NODES</span><span style="font-size:8px;color:var(--accent)">RESOLVING 73%</span><span class="badge bg-acc">FIELD STABLE</span></div>
 </div>
 <div class="card">
 <div class="card-label" style="color:var(--cyan)">GENE STATUS</div>
@@ -176,12 +204,10 @@ canvas{display:block}
 </div>
 <script>
 function rc(c){c.width=c.parentElement.clientWidth;c.height=c.parentElement.clientHeight||parseInt(c.style.height)||120}
-var canvases=['helixCanvas','waveCanvas','neuralCanvas','radialCanvas','deployCanvas','signalCanvas'];
+var canvases=['waveCanvas','radialCanvas','deployCanvas','signalCanvas'];
 function resizeAll(){canvases.forEach(function(id){var c=document.getElementById(id);if(c)rc(c)})}
 setTimeout(resizeAll,100);window.addEventListener('resize',resizeAll);
-var ht=0,strands=[{name:'PARALLAX',color:'34,211,238',phase:0},{name:'RESONANCE',color:'74,222,128',phase:0.9},{name:'DISPATCH',color:'245,158,11',phase:1.8},{name:'CRUCIBLE',color:'124,106,247',phase:2.7},{name:'KILN',color:'239,68,68',phase:3.6},{name:'GAUNTLET',color:'59,130,246',phase:4.5},{name:'FORGE',color:'236,72,153',phase:5.4}];
-function drawHelix(){var c=document.getElementById('helixCanvas');if(!c||!c.width)return requestAnimationFrame(drawHelix);var ctx=c.getContext('2d'),w=c.width,h=c.height,mid=h/2;ctx.clearRect(0,0,w,h);var sorted=[];for(var x=0;x<w;x+=2){sorted.length=0;for(var s=0;s<strands.length;s++){var phase=x*0.025+ht+strands[s].phase;sorted.push({y:mid+Math.sin(phase)*mid*0.55,depth:Math.cos(phase),color:strands[s].color})}sorted.sort(function(a,b){return a.depth-b.depth});for(var i=0;i<sorted.length;i++){var p=sorted[i],alpha=0.15+(p.depth+1)/2*0.7,lw=1.5+(p.depth+1)/2*2;ctx.fillStyle='rgba('+p.color+','+alpha+')';ctx.beginPath();ctx.arc(x,p.y,lw,0,Math.PI*2);ctx.fill();if(p.depth>0.3){ctx.fillStyle='rgba('+p.color+',0.06)';ctx.beginPath();ctx.arc(x,p.y,lw*3,0,Math.PI*2);ctx.fill()}}}ht+=0.012;requestAnimationFrame(drawHelix)}
-drawHelix();
+// Helix replaced by CSS DNA bars
 </script>
 <script>
 var wt=0;function drawWave(){var c=document.getElementById('waveCanvas');if(!c||!c.width)return requestAnimationFrame(drawWave);var ctx=c.getContext('2d'),w=c.width,h=c.height,mid=h/2;ctx.clearRect(0,0,w,h);[{c:'rgba(74,222,128,0.5)',f:0.025,a:0.65,s:0.7},{c:'rgba(34,211,238,0.3)',f:0.018,a:0.45,s:1.1},{c:'rgba(245,158,11,0.2)',f:0.012,a:0.25,s:0.5}].forEach(function(wave){ctx.beginPath();ctx.strokeStyle=wave.c;ctx.lineWidth=1.2;for(var x=0;x<w;x++){var y=mid+Math.sin(x*wave.f+wt*wave.s)*mid*wave.a+Math.sin(x*wave.f*2.1+wt*wave.s*1.6)*mid*wave.a*0.25;x===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}ctx.stroke()});wt+=0.025;requestAnimationFrame(drawWave)}
@@ -193,31 +219,7 @@ function drawRadial(){var c=document.getElementById('radialCanvas');if(!c||!c.wi
 setTimeout(drawRadial,200);
 </script>
 <script>
-var nnC,nnNodes=[],nnEdges=[],nnFires=[],nt=0;
-var teamColors=['34,211,238','74,222,128','245,158,11','124,106,247','239,68,68','59,130,246','236,72,153'];
-var teamNames=['PAR','RES','DIS','CRU','KIL','GAU','FRG'];
-var nodesPerLayer=[8,10,12,10,9,5,3];
-function initNeural(){nnC=document.getElementById('neuralCanvas');if(!nnC||!nnC.width)return;
-var w=nnC.width,h=nnC.height,padX=30,padY=20;
-var totalLayers=nodesPerLayer.length;
-for(var L=0;L<totalLayers;L++){var n=nodesPerLayer[L];var lx=padX+L*(w-2*padX)/(totalLayers-1);
-for(var i=0;i<n;i++){var ly=padY+i*(h-2*padY)/(n-1);nnNodes.push({x:lx,y:ly,layer:L,team:L,r:2.5+Math.random(),active:Math.random()>0.3,pulse:Math.random()*Math.PI*2})}}
-for(var i=0;i<nnNodes.length;i++){var a=nnNodes[i];for(var j=i+1;j<nnNodes.length;j++){var b=nnNodes[j];if(b.layer===a.layer+1){var dist=Math.abs(a.y-b.y);if(dist<(h/3)&&Math.random()>0.35){nnEdges.push({from:i,to:j,weight:0.2+Math.random()*0.6})}}}}
-drawNeural()}
-function drawNeural(){if(!nnC||!nnC.width)return requestAnimationFrame(drawNeural);
-var ctx=nnC.getContext('2d'),w=nnC.width,h=nnC.height;ctx.clearRect(0,0,w,h);
-if(Math.random()<0.06){var fromIdx=Math.floor(Math.random()*nnNodes.length);var possibleEdges=nnEdges.filter(function(e){return e.from===fromIdx||e.to===fromIdx});if(possibleEdges.length){var e=possibleEdges[Math.floor(Math.random()*possibleEdges.length)];nnFires.push({edge:e,progress:0,speed:0.03+Math.random()*0.04,color:teamColors[nnNodes[e.from].team]})}}
-nnEdges.forEach(function(e){var a=nnNodes[e.from],b=nnNodes[e.to];ctx.strokeStyle='rgba(255,255,255,0.03)';ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()});
-for(var fi=nnFires.length-1;fi>=0;fi--){var f=nnFires[fi];f.progress+=f.speed;if(f.progress>1){nnNodes[f.edge.to].pulse=0;nnFires.splice(fi,1);continue}
-var a=nnNodes[f.edge.from],b=nnNodes[f.edge.to];var px=a.x+(b.x-a.x)*f.progress,py=a.y+(b.y-a.y)*f.progress;
-ctx.strokeStyle='rgba('+f.color+','+(0.6*(1-f.progress))+')';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(px,py);ctx.stroke();
-ctx.fillStyle='rgba('+f.color+',0.8)';ctx.beginPath();ctx.arc(px,py,2.5,0,Math.PI*2);ctx.fill();
-ctx.fillStyle='rgba('+f.color+',0.15)';ctx.beginPath();ctx.arc(px,py,8,0,Math.PI*2);ctx.fill()}
-nnNodes.forEach(function(n){n.pulse+=0.04;var glow=0.3+Math.sin(n.pulse)*0.15;var col=teamColors[n.team];var sz=n.active?n.r:n.r*0.6;
-ctx.fillStyle='rgba('+col+','+(n.active?0.7+glow*0.3:0.15)+')';ctx.beginPath();ctx.arc(n.x,n.y,sz,0,Math.PI*2);ctx.fill();
-if(n.active&&glow>0.35){ctx.fillStyle='rgba('+col+',0.08)';ctx.beginPath();ctx.arc(n.x,n.y,sz*3,0,Math.PI*2);ctx.fill()}});
-nt+=0.01;requestAnimationFrame(drawNeural)}
-setTimeout(initNeural,200);
+// Neural replaced by SVG sphere
 </script>
 <script>
 var dt=0;function drawDeploy(){var c=document.getElementById('deployCanvas');if(!c||!c.width)return requestAnimationFrame(drawDeploy);var ctx=c.getContext('2d'),w=c.width,h=c.height,mid=h/2;ctx.clearRect(0,0,w,h);ctx.strokeStyle='rgba(255,255,255,0.03)';ctx.lineWidth=0.5;for(var y=0;y<h;y+=12){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}for(var x=0;x<w;x+=20){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke()}var colors=['74,222,128','34,211,238','124,106,247','245,158,11'];for(var ci=0;ci<colors.length;ci++){ctx.beginPath();ctx.strokeStyle='rgba('+colors[ci]+',0.4)';ctx.lineWidth=1;for(var x=0;x<w;x++){var base=mid+(ci-1.5)*12,noise=Math.sin(x*0.05+dt+ci*2)*8+Math.sin(x*0.12+dt*1.3+ci)*4,converge=x>w*0.6?(x-w*0.6)/(w*0.4):0;var y=base+noise*(1-converge*0.9);x===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}ctx.stroke()}var convX=w*0.65;ctx.fillStyle='rgba(74,222,128,0.6)';ctx.beginPath();ctx.arc(convX,mid,4,0,Math.PI*2);ctx.fill();ctx.fillStyle='rgba(74,222,128,0.1)';ctx.beginPath();ctx.arc(convX,mid,12,0,Math.PI*2);ctx.fill();ctx.strokeStyle='rgba(74,222,128,0.5)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(convX+6,mid);ctx.lineTo(w,mid);ctx.stroke();ctx.font='8px JetBrains Mono';ctx.fillStyle='rgba(74,222,128,0.25)';ctx.fillText('SIGNAL_LOCKED',convX+16,mid-8);dt+=0.02;requestAnimationFrame(drawDeploy)}
