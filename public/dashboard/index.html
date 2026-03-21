@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CHIMERA — Genomic Interface v1.3</title>
+<title>CHIMERA — Genomic Interface v1.4</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#08080a;--surface:#0e0e11;--surface-2:#141418;--border:rgba(255,255,255,0.06);--accent:#7c6af7;--accent-dim:rgba(124,106,247,0.15);--green:#4ade80;--amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;--cyan:#22d3ee;--text:#e8e6e1;--text-muted:rgba(232,230,225,0.55);--dim:rgba(232,230,225,0.30);--mono:'JetBrains Mono',monospace;--sans:'DM Sans',sans-serif}
@@ -52,7 +52,7 @@ canvas{display:block}
 .sync-seg{flex:1;height:5px}
 </style>
 <div class="top-bar">
-<div style="display:flex;align-items:center;gap:20px"><div class="logo">CHIMERA<span class="ver">GENOMIC INTERFACE v1.3</span></div><div class="jp">ゲノミック</div></div>
+<div style="display:flex;align-items:center;gap:20px"><div class="logo">CHIMERA<span class="ver">GENOMIC INTERFACE v1.4</span></div><div class="jp">ゲノミック</div></div>
 <div class="status"><div class="dot"></div><span style="color:var(--green)">NOMINAL</span><span style="color:var(--border)">|</span><span><span style="color:var(--cyan)">4</span> NODES</span><span style="color:var(--border)">|</span><span id="topClock" style="color:var(--amber)">--:--</span></div>
 </div>
 <div class="grid">
@@ -176,7 +176,7 @@ canvas{display:block}
 <!-- FOOTER -->
 <div class="foot">
 <div class="warn-stripe"><span style="background:var(--amber);color:#000;font-size:8px;font-weight:700;padding:1px 4px;letter-spacing:2px">RESTRICTED</span></div>
-<div class="foot-center"><span style="color:var(--amber)">WARNING:</span> FLUX TOLERANCE AT 84%<span style="color:var(--dim)">||</span>SECRET MENU LLC · INFERIS MESH v1.3<span style="color:var(--dim)">||</span><span style="color:var(--green)">57 GENES</span> ACTIVE<span style="color:var(--dim)">||</span><span style="color:var(--cyan)">3 STRANDS</span> EXPRESSING<span style="color:var(--dim)">||</span>SYS_TIME: <span id="clock" style="color:white">--:--:--</span></div>
+<div class="foot-center"><span style="color:var(--amber)">WARNING:</span> FLUX TOLERANCE AT 84%<span style="color:var(--dim)">||</span>SECRET MENU LLC · INFERIS MESH v1.4<span style="color:var(--dim)">||</span><span style="color:var(--green)">57 GENES</span> ACTIVE<span style="color:var(--dim)">||</span><span style="color:var(--cyan)">3 STRANDS</span> EXPRESSING<span style="color:var(--dim)">||</span>SYS_TIME: <span id="clock" style="color:white">--:--:--</span></div>
 <div class="sync-bar"><span style="color:var(--cyan);font-size:7px;letter-spacing:1px">GLOBAL SYNC</span><div style="flex:1;height:5px;display:flex;gap:1px"><div class="sync-seg" style="background:var(--cyan)"></div><div class="sync-seg" style="background:var(--cyan)"></div><div class="sync-seg" style="background:var(--cyan)"></div><div class="sync-seg" style="background:var(--cyan)"></div><div class="sync-seg" style="background:var(--cyan)"></div><div class="sync-seg" style="background:var(--accent)"></div><div class="sync-seg" style="background:var(--accent)"></div><div class="sync-seg" style="background:var(--surface-2)"></div><div class="sync-seg" style="background:var(--surface-2)"></div><div class="sync-seg" style="background:var(--surface-2)"></div></div></div>
 </div>
 <script>
@@ -417,17 +417,17 @@ function initTerrain(){
     var orbitRadius=1.8+Math.random()*1.2;
     var tiltX=(Math.random()-0.5)*1.2;
     var tiltZ=(Math.random()-0.5)*1.2;
-    var speed=0.3+Math.random()*0.5;
+    var speed=0.5+Math.random()*0.7;
     if(i%2===0)speed*=-1;
     var ring=new THREE.Group();
     ring.rotation.x=tiltX;
     ring.rotation.z=tiltZ;
-    var orbitLine=new THREE.RingGeometry(orbitRadius-0.03,orbitRadius+0.03,64);
-    var orbitMat=new THREE.MeshBasicMaterial({color:coreColors[i],transparent:true,opacity:0.22,side:THREE.DoubleSide});
+    var orbitLine=new THREE.RingGeometry(orbitRadius-0.06,orbitRadius+0.06,64);
+    var orbitMat=new THREE.MeshBasicMaterial({color:coreColors[i],transparent:true,opacity:0.45,side:THREE.DoubleSide});
     var orbitMesh=new THREE.Mesh(orbitLine,orbitMat);
     orbitMesh.rotation.x=Math.PI/2;
     ring.add(orbitMesh);
-    var atomGeo=new THREE.SphereGeometry(0.16,12,12);
+    var atomGeo=new THREE.SphereGeometry(0.22,12,12);
     var atomMat=new THREE.MeshBasicMaterial({color:coreColors[i],transparent:true,opacity:0.9});
     var atom=new THREE.Mesh(atomGeo,atomMat);
     atom.userData.coreIndex=i;
@@ -435,7 +435,7 @@ function initTerrain(){
     atom.userData.orbitSpeed=speed;
     atom.userData.orbitPhase=Math.random()*Math.PI*2;
     ring.add(atom);
-    var glowGeo=new THREE.SphereGeometry(0.45,8,8);
+    var glowGeo=new THREE.SphereGeometry(0.6,8,8);
     var glowMat=new THREE.MeshBasicMaterial({color:coreColors[i],transparent:true,opacity:0.35});
     var glow=new THREE.Mesh(glowGeo,glowMat);
     glow.userData.isGlow=true;
@@ -444,13 +444,13 @@ function initTerrain(){
   }
   
   // Central nucleus
-  var nucleusGeo=new THREE.SphereGeometry(0.25,16,16);
+  var nucleusGeo=new THREE.SphereGeometry(0.35,16,16);
   var nucleusMat=new THREE.MeshBasicMaterial({color:0xf59e0b,transparent:true,opacity:0.9});
   var nucleus=new THREE.Mesh(nucleusGeo,nucleusMat);
   nucleus.position.y=0.8;
   scene.add(nucleus);
-  var nucleusGlow=new THREE.SphereGeometry(0.65,12,12);
-  var nucleusGlowMat=new THREE.MeshBasicMaterial({color:0xf59e0b,transparent:true,opacity:0.3});
+  var nucleusGlow=new THREE.SphereGeometry(0.9,12,12);
+  var nucleusGlowMat=new THREE.MeshBasicMaterial({color:0xf59e0b,transparent:true,opacity:0.45});
   var nGlow=new THREE.Mesh(nucleusGlow,nucleusGlowMat);
   nucleus.add(nGlow);
   
@@ -516,7 +516,7 @@ function animateTerrain(){
           var sc=0.8+tempNorm*0.6;
           child.scale.setScalar(sc);
           if(child.children[0]&&child.children[0].userData.isGlow){
-            child.children[0].material.opacity=0.1+tempNorm*0.2;
+            child.children[0].material.opacity=0.2+tempNorm*0.4;
           }
         }
       });
