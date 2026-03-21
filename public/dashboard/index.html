@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CHIMERA — Genomic Interface v0.8</title>
+<title>CHIMERA — Genomic Interface v0.9</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#08080a;--surface:#0e0e11;--surface-2:#141418;--border:rgba(255,255,255,0.06);--accent:#7c6af7;--accent-dim:rgba(124,106,247,0.15);--green:#4ade80;--amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;--cyan:#22d3ee;--text:#e8e6e1;--text-muted:rgba(232,230,225,0.55);--dim:rgba(232,230,225,0.30);--mono:'JetBrains Mono',monospace;--sans:'DM Sans',sans-serif}
@@ -51,7 +51,7 @@ canvas{display:block}
 .sync-seg{flex:1;height:5px}
 </style>
 <div class="top-bar">
-<div style="display:flex;align-items:center;gap:20px"><div class="logo">CHIMERA<span class="ver">GENOMIC INTERFACE v0.8</span></div><div class="jp">ゲノミック</div></div>
+<div style="display:flex;align-items:center;gap:20px"><div class="logo">CHIMERA<span class="ver">GENOMIC INTERFACE v0.9</span></div><div class="jp">ゲノミック</div></div>
 <div class="status"><div class="dot"></div><span style="color:var(--green)">NOMINAL</span><span style="color:var(--border)">|</span><span><span style="color:var(--cyan)">4</span> NODES</span><span style="color:var(--border)">|</span><span id="topClock" style="color:var(--amber)">--:--</span></div>
 </div>
 <div class="grid">
@@ -97,7 +97,7 @@ canvas{display:block}
 <div style="position:absolute;top:10px;left:14px"><div class="cl" style="color:var(--accent)">COALESCENCE</div><div class="cj">合体 · AT FIELD CONTAINMENT</div></div>
 <div style="position:absolute;top:10px;right:14px;font-size:8px;color:var(--dim);border:1px solid rgba(124,106,247,0.3);padding:1px 6px;background:rgba(124,106,247,0.05)">TARGET: AT_FIELD</div>
 <div style="position:absolute;width:140px;height:140px;background:var(--accent);border-radius:50%;filter:blur(60px);opacity:0.12;animation:breathe 3s ease infinite"></div>
-<svg viewBox="0 0 200 200" style="width:60%;max-height:80%;z-index:2;filter:drop-shadow(0 0 3px rgba(124,106,247,0.4));animation:spin-slow 30s linear infinite">
+<svg viewBox="0 0 200 200" style="width:60%;max-height:80%;z-index:2;filter:drop-shadow(0 0 3px rgba(124,106,247,0.4));animation:spin-slow 30s linear infinite" class="sphere-outer">
 <circle cx="100" cy="100" r="90" stroke="var(--accent)" stroke-width="0.5" fill="none" stroke-dasharray="2 4"/>
 <circle cx="100" cy="100" r="95" stroke="var(--accent)" stroke-width="0.2" fill="none" opacity="0.4"/>
 <ellipse cx="100" cy="100" rx="90" ry="25" stroke="var(--accent)" stroke-width="0.5" fill="none"/>
@@ -118,14 +118,14 @@ canvas{display:block}
 <div style="position:absolute;bottom:10px;left:14px;right:14px;display:flex;justify-content:space-between"><span class="b bg">57 NODES</span><span style="font-size:8px;color:var(--accent)">RESOLVING 73%</span><span class="b bp">FIELD STABLE</span></div>
 </div>
 <div class="c">
-<div class="cl" style="color:var(--cyan)">GENE STATUS</div>
-<div class="cj">エージェント同期 · SYNC BARS</div>
+<div class="cl" style="color:var(--cyan)">SYSTEM TELEMETRY</div>
+<div class="cj">ペーパークリップ · LIVE METRICS</div>
 <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:5px;flex:1;align-content:center">
-<div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div style="font-size:9px;font-weight:700;color:var(--cyan)">94</div><div style="width:16px;height:70px;background:var(--surface-2);border-radius:2px;position:relative;overflow:hidden"><div style="position:absolute;bottom:0;width:100%;height:94%;background:linear-gradient(to top,var(--cyan),rgba(34,211,238,0.2));border-radius:2px"></div></div><div style="font-size:7px;color:var(--dim)">FRAME</div></div>
-<div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div style="font-size:9px;font-weight:700;color:var(--cyan)">91</div><div style="width:16px;height:70px;background:var(--surface-2);border-radius:2px;position:relative;overflow:hidden"><div style="position:absolute;bottom:0;width:100%;height:91%;background:linear-gradient(to top,var(--cyan),rgba(34,211,238,0.2));border-radius:2px"></div></div><div style="font-size:7px;color:var(--dim)">THREAD</div></div>
-<div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div style="font-size:9px;font-weight:700;color:var(--cyan)">87</div><div style="width:16px;height:70px;background:var(--surface-2);border-radius:2px;position:relative;overflow:hidden"><div style="position:absolute;bottom:0;width:100%;height:87%;background:linear-gradient(to top,var(--cyan),rgba(34,211,238,0.2));border-radius:2px"></div></div><div style="font-size:7px;color:var(--dim)">KINETIC</div></div>
-<div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div style="font-size:9px;font-weight:700;color:var(--green)">82</div><div style="width:16px;height:70px;background:var(--surface-2);border-radius:2px;position:relative;overflow:hidden"><div style="position:absolute;bottom:0;width:100%;height:82%;background:linear-gradient(to top,var(--green),rgba(74,222,128,0.2));border-radius:2px"></div></div><div style="font-size:7px;color:var(--dim)">SHEAR</div></div>
-<div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div style="font-size:9px;font-weight:700;color:var(--amber)">--</div><div style="width:16px;height:70px;background:var(--surface-2);border-radius:2px;position:relative;overflow:hidden"><div style="position:absolute;bottom:0;width:100%;height:12%;background:linear-gradient(to top,var(--amber),rgba(245,158,11,0.15));border-radius:2px"></div></div><div style="font-size:7px;color:var(--dim)">SYNC</div></div>
+<div class="gene-bar" style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="bar-pct" style="font-size:9px;font-weight:700;color:var(--cyan)">--</div><div style="width:16px;height:70px;background:var(--surface-2);border-radius:2px;position:relative;overflow:hidden"><div class="bar-fill" style="position:absolute;bottom:0;width:100%;height:5%;background:linear-gradient(to top,var(--cyan),rgba(34,211,238,0.2));border-radius:2px;transition:height 1s"></div></div><div class="bar-lbl" style="font-size:7px;color:var(--dim)">CPU</div></div>
+<div class="gene-bar" style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="bar-pct" style="font-size:9px;font-weight:700;color:var(--cyan)">--</div><div style="width:16px;height:70px;background:var(--surface-2);border-radius:2px;position:relative;overflow:hidden"><div class="bar-fill" style="position:absolute;bottom:0;width:100%;height:5%;background:linear-gradient(to top,var(--cyan),rgba(34,211,238,0.2));border-radius:2px;transition:height 1s"></div></div><div class="bar-lbl" style="font-size:7px;color:var(--dim)">MEM</div></div>
+<div class="gene-bar" style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="bar-pct" style="font-size:9px;font-weight:700;color:var(--green)">--</div><div style="width:16px;height:70px;background:var(--surface-2);border-radius:2px;position:relative;overflow:hidden"><div class="bar-fill" style="position:absolute;bottom:0;width:100%;height:5%;background:linear-gradient(to top,var(--green),rgba(74,222,128,0.2));border-radius:2px;transition:height 1s"></div></div><div class="bar-lbl" style="font-size:7px;color:var(--dim)">DISK</div></div>
+<div class="gene-bar" style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="bar-pct" style="font-size:9px;font-weight:700;color:var(--accent)">--</div><div style="width:16px;height:70px;background:var(--surface-2);border-radius:2px;position:relative;overflow:hidden"><div class="bar-fill" style="position:absolute;bottom:0;width:100%;height:5%;background:linear-gradient(to top,var(--accent),rgba(124,106,247,0.2));border-radius:2px;transition:height 1s"></div></div><div class="bar-lbl" style="font-size:7px;color:var(--dim)">GPU</div></div>
+<div class="gene-bar" style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="bar-pct" style="font-size:9px;font-weight:700;color:var(--amber)">--</div><div style="width:16px;height:70px;background:var(--surface-2);border-radius:2px;position:relative;overflow:hidden"><div class="bar-fill" style="position:absolute;bottom:0;width:100%;height:5%;background:linear-gradient(to top,var(--amber),rgba(245,158,11,0.15));border-radius:2px;transition:height 1s"></div></div><div class="bar-lbl" style="font-size:7px;color:var(--dim)">TEMP</div></div>
 </div>
 </div>
 </div>
@@ -149,7 +149,7 @@ canvas{display:block}
 <div class="c">
 <div class="cl" style="color:var(--cyan)">MESH</div>
 <div class="cj">接続 · TAILSCALE FLEET</div>
-<div style="flex:1;display:flex;flex-direction:column;justify-content:center">
+<div id="meshNodes" style="flex:1;display:flex;flex-direction:column;justify-content:center">
 <div class="nr"><div class="nd on"></div><div class="nn">UNICRON</div><div class="ni">100.70.194.81</div></div>
 <div class="nr"><div class="nd on"></div><div class="nn">ACIDBURN</div><div class="ni">100.69.29.1</div></div>
 <div class="nr"><div class="nd off"></div><div class="nn">IRONHIDE</div><div class="ni">offline</div></div>
@@ -162,7 +162,7 @@ canvas{display:block}
 <div class="c">
 <div class="cl" style="color:var(--cyan)">FORGECHIEF</div>
 <div class="cj">指揮官 · DISPATCH INTERFACE</div>
-<div style="flex:1;overflow-y:auto">
+<div id="chiefLog" style="flex:1;overflow-y:auto">
 <div class="ch"><span class="r rc">CHIEF</span>Routing NurseJamie UGC to PARALLAX</div>
 <div class="ch"><span class="r rh">HAWK</span>Decomposed: 3 FRAME, 2 THREAD, 1 SHEAR</div>
 <div class="ch"><span class="r rc">CHIEF</span>Edge capacity OK. Running sovereign.</div>
@@ -264,6 +264,114 @@ var t=n.toTimeString().split(' ')[0]+':'+ms;
 var el=document.getElementById('clock');if(el)el.textContent=t;
 var el2=document.getElementById('topClock');if(el2)el2.textContent=n.toTimeString().split(' ')[0].substring(0,5);
 },50);
+</script>
+<script>
+// === LIVE DATA WIRING ===
+// Paperclip SSE → Gene Status bars + Coalescence speed
+var pSource = new EventSource('http://localhost:3144/');
+var lastCpu=0, lastMem=0, lastDisk=0, lastGpu=0, lastTemp=0;
+
+pSource.onmessage = function(e) {
+  try {
+    var d = JSON.parse(e.data);
+    lastCpu = Math.round(d.cpu || 0);
+    lastMem = Math.round(d.memory ? d.memory.percent : 0);
+    lastDisk = Math.round(d.disk ? d.disk.percent : 0);
+    lastGpu = Math.round(d.gpu ? d.gpu.gpu_percent : 0);
+    lastTemp = Math.round(d.temps ? d.temps.coretemp_package_id_0 : 0);
+
+    // Update Gene Status bars
+    var bars = document.querySelectorAll('.gene-bar');
+    var vals = [lastCpu, lastMem, lastDisk, lastGpu, lastTemp];
+    var labels = ['CPU', 'MEM', 'DISK', 'GPU', 'TEMP'];
+    var colors = ['--cyan','--cyan','--green','--accent','--amber'];
+    bars.forEach(function(bar, i) {
+      if (i < vals.length) {
+        var pct = bar.querySelector('.bar-pct');
+        var fill = bar.querySelector('.bar-fill');
+        if (pct) pct.textContent = vals[i];
+        if (fill) fill.style.height = Math.min(vals[i], 100) + '%';
+        var label = bar.querySelector('.bar-lbl');
+        if (label) label.textContent = labels[i];
+      }
+    });
+
+    // Scale coalescence sphere rotation by CPU load
+    var sphere = document.querySelector('.sphere-outer');
+    if (sphere) {
+      var speed = Math.max(5, 30 - lastCpu * 0.25);
+      sphere.style.animationDuration = speed + 's';
+    }
+
+    // Update uptime in footer if available
+    var uptimeEl = document.getElementById('uptime');
+    if (uptimeEl && d.uptime) uptimeEl.textContent = d.uptime;
+  } catch(err) {}
+};
+pSource.onerror = function() { console.log('Paperclip SSE reconnecting...'); };
+
+// Tailscale → Mesh panel (poll every 30s via a tiny PHP-less approach: read from a file updated by cron)
+function fetchMesh() {
+  fetch('/mesh-status.json').then(function(r){return r.json()}).then(function(nodes){
+    var container = document.getElementById('meshNodes');
+    if (!container || !nodes.length) return;
+    container.innerHTML = '';
+    nodes.forEach(function(n) {
+      var dot = n.online ? 'on' : (n.hostname === 'archlinux' ? 'off' : 'idl');
+      var name = n.hostname.toUpperCase();
+      if (name === 'ARCHLINUX') name = 'IRONHIDE';
+      if (name === HERBIES MAC MINI") name = HERBIE;
+      if (name === "MICHELLES IMAC) name = 'MICHELLE';
+      var ip = n.ip || '';
+      container.innerHTML += '<div class="nr"><div class="nd ' + dot + '"></div><div class="nn">' + name + '</div><div class="ni">' + ip + '</div></div>';
+    });
+  }).catch(function(){});
+}
+setInterval(fetchMesh, 30000);
+fetchMesh();
+
+// ForgeChief input → Ollama mistral-small
+var chiefInput = document.querySelector('.ci input');
+var chiefBtn = document.querySelector('.ci button');
+var chiefLog = document.getElementById('chiefLog');
+if (chiefBtn && chiefInput) {
+  chiefBtn.addEventListener('click', sendToChief);
+  chiefInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') sendToChief(); });
+}
+function sendToChief() {
+  if (!chiefInput || !chiefInput.value.trim()) return;
+  var msg = chiefInput.value.trim();
+  chiefInput.value = '';
+  appendChat('ru', 'YOU', msg);
+  appendChat('rc', 'CHIEF', 'Processing...');
+
+  fetch('http://localhost:11434/api/generate', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      model: 'mistral-small',
+      prompt: 'You are ForgeChief, an AI dispatch agent for the CHIMERA orchestration mesh. You route creative briefs to agent teams (PARALLAX=video, RESONANCE=audio, DISPATCH=copy, CRUCIBLE=design). Be concise, use technical language. User says: ' + msg,
+      stream: false
+    })
+  }).then(function(r){return r.json()}).then(function(d){
+    var lastLine = chiefLog ? chiefLog.lastElementChild : null;
+    if (lastLine && lastLine.textContent.includes('Processing...')) lastLine.remove();
+    appendChat('rc', 'CHIEF', (d.response || 'No response').substring(0, 120));
+  }).catch(function(){
+    var lastLine = chiefLog ? chiefLog.lastElementChild : null;
+    if (lastLine && lastLine.textContent.includes('Processing...')) lastLine.remove();
+    appendChat('rc', 'CHIEF', 'Inference offline. KAIJU pending.');
+  });
+}
+function appendChat(roleClass, roleName, text) {
+  if (!chiefLog) return;
+  var div = document.createElement('div');
+  div.className = 'ch';
+  div.innerHTML = '<span class="r ' + roleClass + '">' + roleName + '</span>' + text;
+  chiefLog.appendChild(div);
+  chiefLog.scrollTop = chiefLog.scrollHeight;
+}
+
 </script>
 </body>
 </html>
