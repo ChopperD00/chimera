@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DNA — UNISEC · Sovereign AI for the Creative Industry</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=DM+Sans:wght@300;400;500;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#08080a;--s1:#0e0e11;--s2:#141418;--s3:#1a1a1f;
+--b:rgba(255,255,255,0.06);--b2:rgba(255,255,255,0.10);
+--acc:#7c6af7;--acc2:rgba(124,106,247,0.15);
+--grn:#4ade80;--amb:#f59e0b;--red:#ef4444;--cyn:#22d3ee;--blu:#3b82f6;
+--txt:#e8e6e1;--tm:rgba(232,230,225,0.55);--td:rgba(232,230,225,0.28);
+--mono:'JetBrains Mono',monospace;--sans:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:var(--mono);overflow-x:hidden}
+::selection{background:var(--acc);color:#fff}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9000;
+background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,0.012) 2px,rgba(255,255,255,0.012) 4px)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 40px;background:rgba(8,8,10,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--b)}
+.nav-logo{display:flex;flex-direction:column;gap:2px}
+.nav-logo .mark{font-size:13px;font-weight:700;letter-spacing:4px;color:var(--acc)}
+.nav-logo .sub{font-size:8px;letter-spacing:3px;color:var(--td)}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:10px;letter-spacing:2px;color:var(--td);text-decoration:none;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--txt)}
+.nav-cta{display:flex;align-items:center;gap:12px}
+.esc-bar{display:flex;gap:3px;align-items:center}
+.esc-b{width:10px;height:4px;border-radius:1px}
+.btn-ghost{font-size:10px;letter-spacing:2px;color:var(--tm);background:none;border:1px solid var(--b2);border-radius:4px;padding:8px 16px;cursor:pointer;font-family:var(--mono);transition:all .2s}
+.btn-ghost:hover{border-color:var(--acc);color:var(--acc)}
+.btn-acc{font-size:10px;letter-spacing:2px;color:#fff;background:var(--acc);border:none;border-radius:4px;padding:8px 20px;cursor:pointer;font-family:var(--mono);transition:opacity .2s}
+.btn-acc:hover{opacity:.85}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:120px 40px 80px;text-align:center}
+.hero-canvas{position:absolute;inset:0;z-index:0}
+.hero-content{position:relative;z-index:10;max-width:900px}
+.hero-kicker{font-size:9px;letter-spacing:5px;color:var(--acc);margin-bottom:20px;border:1px solid rgba(124,106,247,0.25);border-radius:3px;display:inline-block;padding:5px 14px}
+.hero-kicker span{color:var(--td);margin:0 8px}
+.hero-h1{font-family:var(--sans);font-size:clamp(42px,6vw,80px);font-weight:900;line-height:1.0;letter-spacing:-2px;margin-bottom:24px;color:var(--txt)}
+.hero-h1 em{color:var(--acc);font-style:italic}
+.hero-h1 .cyn{color:var(--cyn)}
+.hero-sub{font-family:var(--sans);font-size:17px;color:var(--tm);max-width:560px;margin:0 auto 40px;line-height:1.7;font-weight:400}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:56px}
+.btn-hero-pri{font-size:11px;letter-spacing:2px;padding:14px 32px;background:linear-gradient(135deg,var(--acc),#5b4fd4);color:#fff;border:none;border-radius:6px;cursor:pointer;font-family:var(--mono);transition:all .2s}
+.btn-hero-pri:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(124,106,247,0.35)}
+.btn-hero-sec{font-size:11px;letter-spacing:2px;padding:14px 32px;background:none;color:var(--cyn);border:1px solid rgba(34,211,238,0.3);border-radius:6px;cursor:pointer;font-family:var(--mono);transition:all .2s}
+.btn-hero-sec:hover{border-color:var(--cyn);background:rgba(34,211,238,0.06)}
+.hero-stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap}
+.stat{display:flex;flex-direction:column;align-items:center;gap:4px}
+.stat-n{font-size:28px;font-weight:700;color:var(--txt)}
+.stat-n .acc{color:var(--acc)}
+.stat-n .cyn{color:var(--cyn)}
+.stat-n .grn{color:var(--grn)}
+.stat-l{font-size:9px;letter-spacing:2px;color:var(--td);text-transform:uppercase}
+.stat-div{width:1px;height:40px;background:var(--b);align-self:center}
+.ticker-wrap{border-top:1px solid var(--b);border-bottom:1px solid var(--b);padding:12px 0;overflow:hidden;background:var(--s1)}
+.ticker-inner{display:flex;gap:60px;width:max-content;animation:ticker 24s linear infinite}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-item{font-size:9px;letter-spacing:3px;color:var(--td);white-space:nowrap;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.ticker-dot{width:4px;height:4px;border-radius:50%;background:var(--acc)}
+section{padding:100px 40px;position:relative}
+.sec-label{font-size:9px;letter-spacing:4px;color:var(--acc);text-transform:uppercase;margin-bottom:6px}
+.sec-jp{font-size:9px;letter-spacing:3px;color:var(--td);margin-bottom:28px}
+.sec-h2{font-family:var(--sans);font-size:clamp(28px,4vw,48px);font-weight:800;color:var(--txt);line-height:1.1;margin-bottom:14px;letter-spacing:-1px}
+.sec-h2 em{color:var(--acc);font-style:italic}
+.sec-sub{font-family:var(--sans);font-size:16px;color:var(--tm);max-width:560px;line-height:1.7;margin-bottom:60px}
+.gene-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden}
+.gene-card{background:var(--s1);padding:28px;position:relative;overflow:hidden;transition:background .2s}
+.gene-card:hover{background:var(--s2)}
+.gene-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%;background:var(--accent-c,var(--acc))}
+.gene-glyph{font-size:22px;margin-bottom:14px;opacity:.8}
+.gene-name{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--accent-c,var(--acc));margin-bottom:4px;text-transform:uppercase}
+.gene-title{font-family:var(--sans);font-size:16px;font-weight:700;color:var(--txt);margin-bottom:8px}
+.gene-desc{font-size:11px;color:var(--tm);line-height:1.6}
+.gene-badge{position:absolute;top:16px;right:16px;font-size:8px;letter-spacing:1px;padding:3px 8px;border-radius:3px;background:rgba(74,222,128,0.08);color:var(--grn)}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.tag{font-size:9px;letter-spacing:1px;padding:3px 10px;border-radius:3px;border:1px solid var(--b)}
+.tag.cyn{border-color:rgba(34,211,238,0.25);color:var(--cyn)}
+.tag.acc{border-color:rgba(124,106,247,0.25);color:var(--acc)}
+.tag.grn{border-color:rgba(74,222,128,0.2);color:var(--grn)}
+.tag.amb{border-color:rgba(245,158,11,0.2);color:var(--amb)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.split.rev{direction:rtl}
+.split.rev>*{direction:ltr}
+.split-visual{background:var(--s1);border:1px solid var(--b);border-radius:10px;padding:28px;position:relative;overflow:hidden}
+.split-visual::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,106,247,0.04),transparent);pointer-events:none}
+.flow-step{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid var(--b)}
+.flow-step:last-child{border-bottom:none}
+.flow-num{font-size:9px;font-weight:700;letter-spacing:1px;color:var(--acc);background:rgba(124,106,247,0.12);width:24px;height:24px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.flow-body .flow-t{font-size:11px;font-weight:700;letter-spacing:1px;color:var(--txt);margin-bottom:3px;text-transform:uppercase}
+.flow-body .flow-d{font-size:11px;color:var(--tm);line-height:1.5}
+.tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.tier-card{background:var(--s1);border:1px solid var(--b);border-radius:10px;padding:32px;position:relative;overflow:hidden}
+.tier-card.featured{border-color:rgba(124,106,247,0.4);background:rgba(124,106,247,0.05)}
+.tier-card.featured::after{content:'RECOMMENDED';position:absolute;top:16px;right:16px;font-size:8px;letter-spacing:2px;color:var(--acc);background:rgba(124,106,247,0.12);padding:3px 8px;border-radius:3px}
+.tier-name{font-size:10px;letter-spacing:3px;color:var(--td);text-transform:uppercase;margin-bottom:12px}
+.tier-price{font-family:var(--sans);font-size:40px;font-weight:900;color:var(--txt);margin-bottom:4px;letter-spacing:-1px}
+.tier-price span{font-size:14px;color:var(--td);font-weight:400}
+.tier-desc{font-size:12px;color:var(--tm);margin-bottom:24px;line-height:1.5}
+.tier-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.tier-features li{font-size:11px;color:var(--tm);display:flex;gap:8px;align-items:flex-start}
+.tier-features li::before{content:'→';color:var(--acc);flex-shrink:0}
+.tier-btn{width:100%;padding:12px;font-size:10px;letter-spacing:2px;font-family:var(--mono);border-radius:5px;cursor:pointer;transition:all .2s}
+.tier-btn.pri{background:var(--acc);color:#fff;border:none}
+.tier-btn.pri:hover{opacity:.85}
+.tier-btn.sec{background:none;color:var(--txt);border:1px solid var(--b2)}
+.tier-btn.sec:hover{border-color:var(--acc);color:var(--acc)}
+footer{border-top:1px solid var(--b);padding:32px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.foot-logo{font-size:12px;font-weight:700;letter-spacing:4px;color:var(--acc)}
+.foot-sub{font-size:9px;color:var(--td);letter-spacing:2px;margin-top:4px}
+.esc-strip{display:flex;gap:3px}
+@media(max-width:768px){
+nav{padding:12px 20px}.nav-links{display:none}
+section{padding:60px 20px}.split{grid-template-columns:1fr;gap:40px}
+.hero{padding:100px 20px 60px}footer{padding:24px 20px}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-logo"><div class="mark">DNA</div><div class="sub">BY UNISEC · ゲノミック</div></div>
+  <div class="nav-links"><a href="#genome">Product</a><a href="#genome">Genome</a><a href="#strand">STRAND</a><a href="#pricing">Pricing</a><a href="#edge">About</a></div>
+  <div class="nav-cta">
+    <div class="esc-bar"><div class="esc-b" style="background:#4ade80"></div><div class="esc-b" style="background:#4ade80;opacity:.7"></div><div class="esc-b" style="background:#f59e0b"></div><div class="esc-b" style="background:#ef4444;opacity:.4"></div></div>
+    <button class="btn-ghost">SIGN IN</button><button class="btn-acc">GET ACCESS →</button>
+  </div>
+</nav>
+<div class="hero">
+  <canvas class="hero-canvas" id="heroCanvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-kicker">UNISEC · 秘密メニュー<span>·</span>DNA v3.0<span>·</span>57 GENES ACTIVE</div>
+    <h1 class="hero-h1">Your creative genome,<br><em>expressed</em> at <span class="cyn">machine speed</span></h1>
+    <p class="hero-sub">A 57-agent orchestration mesh underneath a chat interface. Free to talk. Pay to sequence. Edge-first, sovereign, built for the creative industry.</p>
+    <div class="hero-btns"><button class="btn-hero-pri">START SEQUENCING →</button><button class="btn-hero-sec">VIEW THE GENOME</button></div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-n"><span class="acc">57</span></div><div class="stat-l">Active genes</div></div>
+      <div class="stat-div"></div>
+      <div class="stat"><div class="stat-n"><span class="cyn">7</span></div><div class="stat-l">Agent teams</div></div>
+      <div class="stat-div"></div>
+      <div class="stat"><div class="stat-n"><span class="grn">85<span style="font-size:16px">%</span></span></div><div class="stat-l">Pro margin</div></div>
+      <div class="stat-div"></div>
+      <div class="stat"><div class="stat-n" style="font-size:18px">EDGE</div><div class="stat-l">Sovereign · $0 inference</div></div>
+    </div>
+  </div>
+</div>
+<div class="ticker-wrap"><div class="ticker-inner">
+  <span class="ticker-item"><span class="ticker-dot"></span>PARALLAX · 映像パイプライン</span>
+  <span class="ticker-item"><span class="ticker-dot" style="background:#4ade80"></span>RESONANCE · 音響パイプライン</span>
+  <span class="ticker-item"><span class="ticker-dot" style="background:#f59e0b"></span>DISPATCH · コンテンツ配信</span>
+  <span class="ticker-item"><span class="ticker-dot" style="background:#7c6af7"></span>CRUCIBLE · デザイン</span>
+  <span class="ticker-item"><span class="ticker-dot" style="background:#22d3ee"></span>FORGE MOTION · AE→WEB</span>
+  <span class="ticker-item"><span class="ticker-dot" style="background:#ef4444"></span>GAUNTLET · 運用ルーティング</span>
+  <span class="ticker-item"><span class="ticker-dot"></span>STRAND · 物語変換システム</span>
+  <span class="ticker-item"><span class="ticker-dot" style="background:#4ade80"></span>EDGE SOVEREIGN · ゼロマージナルコスト</span>
+  <span class="ticker-item"><span class="ticker-dot"></span>PARALLAX · 映像パイプライン</span>
+  <span class="ticker-item"><span class="ticker-dot" style="background:#4ade80"></span>RESONANCE · 音響パイプライン</span>
+  <span class="ticker-item"><span class="ticker-dot" style="background:#f59e0b"></span>DISPATCH · コンテンツ配信</span>
+  <span class="ticker-item"><span class="ticker-dot" style="background:#7c6af7"></span>CRUCIBLE · デザイン</span>
+  <span class="ticker-item"><span class="ticker-dot" style="background:#22d3ee"></span>FORGE MOTION · AE→WEB</span>
+  <span class="ticker-item"><span class="ticker-dot" style="background:#ef4444"></span>GAUNTLET · 運用ルーティング</span>
+  <span class="ticker-item"><span class="ticker-dot"></span>STRAND · 物語変換システム</span>
+  <span class="ticker-item"><span class="ticker-dot" style="background:#4ade80"></span>EDGE SOVEREIGN · ゼロマージナルコスト</span>
+</div></div>
+<section id="genome">
+  <div class="sec-label">02 · AGENT GENOME</div><div class="sec-jp">遺伝子構造 · THE TEAMS</div>
+  <h2 class="sec-h2">57 genes. 7 teams.<br><em>One helix.</em></h2>
+  <p class="sec-sub">Each agent team handles a distinct creative pipeline. Brief → sequence → expression → phenotype.</p>
+  <div class="gene-grid">
+    <div class="gene-card" style="--accent-c:#22d3ee"><div class="gene-glyph">◈</div><div class="gene-name">PARALLAX</div><div class="gene-title">Video Pipeline</div><div class="gene-desc">FRAME → THREAD → KINETIC → SHEAR → SYNC. Full UGC and brand video pipeline with mutation-optimized sequencing.</div><div class="tag-row"><span class="tag cyn">FRAME</span><span class="tag cyn">KINETIC</span><span class="tag cyn">SYNC</span></div><div class="gene-badge">ACTIVE</div></div>
+    <div class="gene-card" style="--accent-c:#4ade80"><div class="gene-glyph">〰</div><div class="gene-name">RESONANCE</div><div class="gene-title">Audio Pipeline</div><div class="gene-desc">TIMBRE → TEMPO → MIX. Sovereign voice and music generation. YuE local inference replaces Suno dependency.</div><div class="tag-row"><span class="tag grn">TIMBRE</span><span class="tag grn">MIX</span></div></div>
+    <div class="gene-card" style="--accent-c:#f59e0b"><div class="gene-glyph">⊡</div><div class="gene-name">DISPATCH</div><div class="gene-title">Copy & Content</div><div class="gene-desc">SCRIBE → SCRIPTER → STRATEGIST. Campaign copy, scripts, and content strategy routed through ForgeChief.</div><div class="tag-row"><span class="tag amb">SCRIBE</span><span class="tag amb">STRATEGIST</span></div></div>
+    <div class="gene-card" style="--accent-c:#7c6af7"><div class="gene-glyph">◎</div><div class="gene-name">CRUCIBLE</div><div class="gene-title">Design Sequencing</div><div class="gene-desc">STENCIL → TUNER → JUDGE. Visual system generation with LoRA fine-tuning and ≥7 QA threshold enforcement.</div><div class="tag-row"><span class="tag acc">STENCIL</span><span class="tag acc">JUDGE</span></div></div>
+    <div class="gene-card" style="--accent-c:#7c6af7"><div class="gene-glyph">⬡</div><div class="gene-name">KILN</div><div class="gene-title">Training & LoRA</div><div class="gene-desc">STRAND VLM + DEADWEIGHT. Custom model training pipeline. Train in Azure AI Foundry, run on edge at zero cost.</div><div class="tag-row"><span class="tag acc">STRAND VLM</span><span class="tag acc">DEADWEIGHT</span></div></div>
+    <div class="gene-card" style="--accent-c:#3b82f6"><div class="gene-glyph">⊕</div><div class="gene-name">GAUNTLET</div><div class="gene-title">Ops & Routing</div><div class="gene-desc">HAWK → ForgeChief → RECON. Pipeline conductor on Claude Opus. Smart routing: edge vs cloud vs burst.</div><div class="tag-row"><span class="tag" style="border-color:rgba(59,130,246,0.25);color:#3b82f6">HAWK</span><span class="tag" style="border-color:rgba(59,130,246,0.25);color:#3b82f6">FORGECHIEF</span></div></div>
+  </div>
+</section>
+<section id="strand" style="background:var(--s1);border-top:1px solid var(--b);border-bottom:1px solid var(--b)">
+  <div class="sec-label">03 · STRAND</div><div class="sec-jp">物語翻訳 · STORYBOARD → PRODUCTION</div>
+  <div class="split">
+    <div class="split-text">
+      <h2 class="sec-h2">Draw what you see.<br><em>We build what you mean.</em></h2>
+      <p class="sec-sub" style="margin-bottom:32px">A 9-prefix unified tag language and 6-color ink system for physical storyboard notebooks. No competitor exists in this space.</p>
+      <div class="tag-row" style="margin-bottom:24px"><span class="tag cyn">&gt; MOTION</span><span class="tag grn">@ TIMELINE</span><span class="tag amb"># TRIGGERS</span><span class="tag acc">$ STYLE</span><span class="tag cyn">~ REFERENCE</span><span class="tag" style="border-color:rgba(239,68,68,0.25);color:#ef4444">& CHARACTER</span><span class="tag" style="border-color:rgba(59,130,246,0.25);color:#3b82f6">^ CAMERA</span><span class="tag acc">% ROUTING</span></div>
+      <button class="btn-hero-sec" style="font-size:10px;padding:12px 24px">EXPLORE STRAND NOTATION →</button>
+    </div>
+    <div class="split-visual">
+      <div style="font-size:9px;letter-spacing:2px;color:var(--td);margin-bottom:16px">STRAND PARSE FLOW · パーサーフロー</div>
+      <div class="flow-step"><div class="flow-num">01</div><div class="flow-body"><div class="flow-t">ForgeFX notebook photo</div><div class="flow-d">Physical storyboard with 6-color ink annotations. DS200 scanner ingests at source framerate.</div></div></div>
+      <div class="flow-step"><div class="flow-num" style="background:rgba(34,211,238,0.12);color:#22d3ee">02</div><div class="flow-body"><div class="flow-t">STRAND VLM → tag extraction</div><div class="flow-d">Vision-language model on Jetson reads the notebook. Extracts structured BriefPayload JSON from ink annotations.</div></div></div>
+      <div class="flow-step"><div class="flow-num" style="background:rgba(74,222,128,0.08);color:#4ade80">03</div><div class="flow-body"><div class="flow-t">HAWK → agent sequencing</div><div class="flow-d">Brief decomposes into parallel generation tasks. PARALLAX, CRUCIBLE, RESONANCE activate.</div></div></div>
+      <div class="flow-step" style="border-bottom:none"><div class="flow-num" style="background:rgba(245,158,11,0.08);color:#f59e0b">04</div><div class="flow-body"><div class="flow-t">Phenotype delivery</div><div class="flow-d">Production-ready assets. Video, image, audio, copy. JUDGE QA ≥7 enforced before output.</div></div></div>
+    </div>
+  </div>
+</section>
+<section id="edge">
+  <div class="sec-label">04 · SOVEREIGN EDGE</div><div class="sec-jp">エッジファースト · ZERO MARGINAL COST</div>
+  <div class="split rev">
+    <div class="split-text">
+      <h2 class="sec-h2">Train in cloud.<br><em>Run on edge.</em><br>Pay nothing per token.</h2>
+      <p class="sec-sub" style="margin-bottom:32px">NVIDIA Jetson AGX Orin runs 70B models locally. Azure provides fine-tuning and GPU burst. Every deployed model costs $0 to run indefinitely.</p>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px">
+        <div style="display:flex;align-items:center;gap:12px;font-size:11px;color:var(--tm)"><span style="color:#4ade80;font-size:9px">●</span>UNICRON · ACIDBURN · GRIMLOCK — ops backbone active</div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:11px;color:var(--tm)"><span style="color:#f59e0b;font-size:9px">●</span>KAIJU · RYUJIN — Jetson fleet pending</div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:11px;color:var(--tm)"><span style="color:#7c6af7;font-size:9px">●</span>Azure Arc · IoT Hub · AI Foundry — hybrid cloud layer</div>
+      </div>
+      <button class="btn-hero-sec" style="font-size:10px;padding:12px 24px">VIEW ARCHITECTURE →</button>
+    </div>
+    <div class="split-visual">
+      <div style="font-size:9px;letter-spacing:2px;color:var(--td);margin-bottom:20px">SMART ROUTING · スマートルーティング</div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="background:var(--s2);border:1px solid var(--b);border-left:2px solid #4ade80;border-radius:6px;padding:14px 16px"><div style="font-size:9px;letter-spacing:2px;color:#4ade80;margin-bottom:4px">CHAT ROUTE</div><div style="font-size:11px;color:var(--tm)">Ollama mistral-nemo:7B → ACIDBURN local · $0.00</div></div>
+        <div style="background:var(--s2);border:1px solid var(--b);border-left:2px solid #7c6af7;border-radius:6px;padding:14px 16px"><div style="font-size:9px;letter-spacing:2px;color:#7c6af7;margin-bottom:4px">DESIGN ROUTE</div><div style="font-size:11px;color:var(--tm)">ForgeChief → PHANTOM + FORGE_CREATIVE · Gemini Pro</div></div>
+        <div style="background:var(--s2);border:1px solid var(--b);border-left:2px solid #22d3ee;border-radius:6px;padding:14px 16px"><div style="font-size:9px;letter-spacing:2px;color:#22d3ee;margin-bottom:4px">VISION ROUTE</div><div style="font-size:11px;color:var(--tm)">Anthropic claude-sonnet · vision QA loop via Pixtral</div></div>
+        <div style="background:var(--s2);border:1px solid rgba(245,158,11,0.15);border-left:2px solid #f59e0b;border-radius:6px;padding:14px 16px"><div style="font-size:9px;letter-spacing:2px;color:#f59e0b;margin-bottom:4px">BURST ROUTE</div><div style="font-size:11px;color:var(--tm)">Azure H100 GPU burst · same job never pays twice (cached)</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="pricing" style="background:var(--s1);border-top:1px solid var(--b)">
+  <div style="text-align:center;margin-bottom:60px"><div class="sec-label" style="display:inline-block">05 · PRICING</div><div class="sec-jp">収益モデル</div><h2 class="sec-h2" style="max-width:400px;margin:0 auto 14px">Free to chat.<br><em>Pay to orchestrate.</em></h2></div>
+  <div class="tier-grid" style="max-width:960px;margin:0 auto">
+    <div class="tier-card"><div class="tier-name">Free · BYOK</div><div class="tier-price">$0<span>/mo</span></div><div class="tier-desc">Multi-model sidebar. Bring your own keys. No orchestration.</div><ul class="tier-features"><li>Anthropic, Gemini, Perplexity, Ollama</li><li>Local inference via Ollama</li><li>No agent pipeline access</li></ul><button class="tier-btn sec">START FREE</button></div>
+    <div class="tier-card featured"><div class="tier-name">Pro · Orchestration</div><div class="tier-price">$29<span>/mo</span></div><div class="tier-desc">Full 57-agent mesh. HAWK pipeline. Edge mesh access.</div><ul class="tier-features"><li>HAWK + ForgeChief dispatch</li><li>57-agent genome (all 7 teams)</li><li>STRAND brief intake</li><li>Stitch design vault sync</li><li>Azure burst capacity</li></ul><button class="tier-btn pri">START SEQUENCING</button></div>
+    <div class="tier-card"><div class="tier-name">Node · Sovereign</div><div class="tier-price">$750<span>+/mo</span></div><div class="tier-desc">Managed Jetson hardware on-site. Sovereign inference. Zero API dependency.</div><ul class="tier-features"><li>NVIDIA Jetson AGX Orin on-site</li><li>70B models locally, $0 inference</li><li>Azure Arc fleet management</li><li>Custom LoRA fine-tuning</li></ul><button class="tier-btn sec">CONTACT UNISEC</button></div>
+  </div>
+</section>
+<footer>
+  <div><div class="foot-logo">DNA · UNISEC</div><div class="foot-sub">SECRET MENU LLC + UNITY OF SOUND · unisec.dev</div></div>
+  <div style="display:flex;align-items:center;gap:16px;font-size:9px;color:var(--td);letter-spacing:1px">
+    <span>57 GENES · 7 TEAMS</span><span style="color:rgba(255,255,255,0.06)">|</span><span>MESH ACTIVE</span><span style="color:rgba(255,255,255,0.06)">|</span>
+    <div class="esc-strip"><div style="background:#4ade80;width:14px;height:5px;border-radius:1px"></div><div style="background:#4ade80;width:14px;height:5px;border-radius:1px;opacity:.7"></div><div style="background:#f59e0b;width:14px;height:5px;border-radius:1px"></div><div style="background:#ef4444;width:14px;height:5px;border-radius:1px;opacity:.4"></div><div style="background:#ef4444;width:14px;height:5px;border-radius:1px;opacity:.2"></div></div>
+  </div>
+</footer>
+<script>
+const canvas=document.getElementById('heroCanvas'),ctx=canvas.getContext('2d');let W,H,P=[];
+function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;}
+function mkP(){return{x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.5+.5,c:['rgba(124,106,247,','rgba(34,211,238,','rgba(74,222,128,'][Math.floor(Math.random()*3)]+(Math.random()*.5+.1)+')'}}
+resize();for(let i=0;i<120;i++)P.push(mkP());
+function draw(){ctx.clearRect(0,0,W,H);for(let i=0;i<P.length;i++)for(let j=i+1;j<P.length;j++){const dx=P[i].x-P[j].x,dy=P[i].y-P[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<100){ctx.beginPath();ctx.strokeStyle='rgba(124,106,247,'+(0.08*(1-d/100))+')';ctx.lineWidth=.5;ctx.moveTo(P[i].x,P[i].y);ctx.lineTo(P[j].x,P[j].y);ctx.stroke();}}
+P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.c;ctx.fill();});requestAnimationFrame(draw);}
+draw();window.addEventListener('resize',resize);
+</script>
+</body>
+</html>
