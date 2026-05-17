@@ -32,7 +32,7 @@ These live on ACIDBURN (100.69.29.1) and are available to any mesh node the mome
 ---
 
 ## APIs — configure locally on BL-17
-*Get keys from Phil via secure channel (1Password or in person — not email)*
+*Get keys from Phil via Bitwarden — secretme.nu org → shared-keys collection*
 
 ### AI / Generation
 | Service | Env var | Notes |
@@ -96,7 +96,7 @@ claude mcp add cloudflare https://bindings.mcp.cloudflare.com/mcp
 ## Environment template — ~/.env.chimera
 
 ```bash
-# Get values from Phil via 1Password
+# Get values from Bitwarden → secretme.nu org → shared-keys collection
 export ANTHROPIC_API_KEY=""
 export OPENAI_API_KEY=""
 export GEMINI_API_KEY=""
@@ -141,9 +141,9 @@ Add to `.zshrc`: `[ -f ~/.env.chimera ] && source ~/.env.chimera`
 
 ## What does NOT need to run locally on BL-17
 
-These live on ACIDBURN — use mesh endpoints, don’t duplicate:
+These live on ACIDBURN — use mesh endpoints, don't duplicate:
 - Qdrant, Ollama, n8n server, Cloudflared, Flask workers, NERV server
 
 ---
 
-*Last updated: 2026-05-16 · UNISEC / Secret Menu LLC*
+*Last updated: 2026-05-17 · UNISEC / Secret Menu LLC*
